@@ -4,7 +4,6 @@
  * @LastEditors: Knight
  * @LastEditTime: 2025-11-02 19:34:42
  */
-import "./App.css";
 import SichuanMap from "./components/SichuanMap";
 
 function App() {
