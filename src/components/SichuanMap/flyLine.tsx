@@ -84,21 +84,12 @@ export default function FlyLine({ projection }: { projection: GeoProjection }) {
 
   return (
     <object3D position={[0, 0, -0.51]}>
-      {/* <EffectComposer>
-        <Bloom /> */}
       <points geometry={geometry.current}>
-        {/* <bufferGeometry setFromPoints={newPoints2}>
-          <bufferAttribute
-            attach="attributes-percent"
-            args={[new Float32Array(percentArr), 1]}
-          />
-        </bufferGeometry> */}
         <pointsMaterial
           transparent
-          // depthTest={false}
           color={controls.lineColor}
           size={0.2}
-          blending={THREE.AdditiveBlending}
+          // blending={THREE.AdditiveBlending}
           onBeforeCompile={(shader) => {
             // 顶点着色器中声明一个attribute变量:百分比
             shader.vertexShader = shader.vertexShader
@@ -124,7 +115,6 @@ export default function FlyLine({ projection }: { projection: GeoProjection }) {
           }}
         />
       </points>
-      {/* </EffectComposer> */}
     </object3D>
   );
 }

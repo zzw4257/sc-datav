@@ -248,10 +248,13 @@ export default function SichuanMap() {
             />
             <SichuanMap3D />
             <OrbitControls
-              enablePan={true}
-              enableZoom={true}
-              enableRotate={true}
+              enablePan
+              enableZoom
+              enableRotate
               target={[0, 0, 0]} // 设置控制器的目标点为中心
+              minDistance={10}
+              maxDistance={20}
+              maxPolarAngle={1.5}
             />
           </Canvas>
         </CanvasWrapper>
