@@ -1,9 +1,9 @@
-name: datav demo
+name: Datav Demo
 
 on:
   push:
     tags:
-      - 'v*' # 仅当推送以v开头的tag时触发，例如 v1.0.0
+      - 'v*'  # 仅当推送 v 开头的 tag 时触发，例如 v1.0.0
 
 jobs:
   build-and-deploy:
@@ -13,23 +13,27 @@ jobs:
       - name: 🛎️ Checkout code
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Node
+      - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: 'pnpm'
 
-      - name: 📦 Install dependencies
-        run: pnpm i
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10  # 可以指定版本
+
+      - name: 📥 Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: 🧱 Build project
-        run: pnpm build
+        run: pnpm run build
 
-      # 部署到 GitHub Pages
       - name: 🚀 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
           publish_branch: gh-pages
-          # 下面两行可选：显示Tag版本
+          publish_dir: ./dist
           commit_message: "Deploy from tag ${{ github.ref_name }}"
