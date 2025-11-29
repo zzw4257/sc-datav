@@ -64,6 +64,7 @@ export default function SichuanMap() {
               enablePan
               enableZoom
               enableRotate
+              zoomSpeed={0.3}
               minDistance={10}
               maxDistance={20}
               maxPolarAngle={1.5}
