@@ -3,7 +3,6 @@ import { OrbitControls, ContactShadows } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import Content from "./content";
 import Lights from "./lights";
-
 import Scene from "./scene";
 
 const Wrapper = styled.div`
@@ -26,7 +25,7 @@ export default function Index() {
         <Canvas
           flat
           shadows
-          camera={{ position: [0, 10, 20], fov: 50 }}
+          camera={{ position: [-50, 125, 250], fov: 50, far: 2000, near: 1 }}
           dpr={[1, 2]}>
           <color attach="background" args={["#fff5e8"]} />
           <Lights />
@@ -34,23 +33,23 @@ export default function Index() {
           <Scene />
 
           <ContactShadows
-            opacity={0.2}
-            scale={20}
-            blur={0.01}
+            opacity={0.5}
+            scale={300}
+            blur={0.5}
             far={10}
             resolution={256}
             color="#000000"
-            position={[0, -0.01, 0]}
+            position={[0, -0.1, 0]}
           />
 
           <OrbitControls
-            enablePan
-            enableZoom
-            enableRotate
+            // enablePan
+            // enableZoom
+            // enableRotate
             zoomSpeed={0.3}
-            minDistance={10}
-            maxDistance={20}
-            maxPolarAngle={1.5}
+            // minDistance={10}
+            // maxDistance={20}
+            // maxPolarAngle={1.5}
           />
         </Canvas>
       </CanvasWrapper>

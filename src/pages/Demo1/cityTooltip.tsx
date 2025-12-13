@@ -1,4 +1,5 @@
 import { Html } from "@react-three/drei";
+import { useImperativeHandle, useState, type Ref } from "react";
 import styled from "styled-components";
 
 const TooltipBox = styled.div`
@@ -31,6 +32,7 @@ const DataItem = styled.div`
 `;
 
 interface CityTooltipProps {
+  ref?: Ref<{ open: () => void; close: () => void }>;
   data: {
     city: string;
     population: number;
@@ -42,32 +44,38 @@ interface CityTooltipProps {
 }
 
 export default function CityTooltip(props: CityTooltipProps) {
-  const { data, position, visible } = props;
+  const { ref, data, position } = props;
+  const [visible, setVisible] = useState(false);
 
-  if (!visible) return null;
+  useImperativeHandle(ref, () => ({
+    open: () => setVisible(true),
+    close: () => setVisible(false),
+  }));
 
   return (
-    <Html
-      center
-      position={position}
-      distanceFactor={10}
-      zIndexRange={[1001 - 1500]}
-      style={{ pointerEvents: "none" }}>
-      <TooltipBox>
-        <CityName>{data.city}</CityName>
-        <DataItem>
-          <span>人口:</span>
-          <span>{data.population}万</span>
-        </DataItem>
-        <DataItem>
-          <span>GDP:</span>
-          <span>{data.gdp}</span>
-        </DataItem>
-        <DataItem>
-          <span>面积:</span>
-          <span>{data.area}</span>
-        </DataItem>
-      </TooltipBox>
-    </Html>
+    visible && (
+      <Html
+        center
+        position={position}
+        distanceFactor={100}
+        zIndexRange={[1001 - 1500]}
+        style={{ pointerEvents: "none" }}>
+        <TooltipBox>
+          <CityName>{data.city}</CityName>
+          <DataItem>
+            <span>人口:</span>
+            <span>{data.population}万</span>
+          </DataItem>
+          <DataItem>
+            <span>GDP:</span>
+            <span>{data.gdp}</span>
+          </DataItem>
+          <DataItem>
+            <span>面积:</span>
+            <span>{data.area}</span>
+          </DataItem>
+        </TooltipBox>
+      </Html>
+    )
   );
 }
