@@ -20,6 +20,7 @@ import {
   Vector3,
 } from "three";
 import { useNavigate } from "react-router";
+import Bg from "./bg";
 
 const Wrapper = styled.div`
   position: relative;
@@ -93,12 +94,12 @@ export default function Index() {
     <Wrapper>
       <Canvas camera={{ position: [0, 0, 100], fov: 15 }}>
         <fog attach="fog" args={["#6e6e6e", 8.5, 12]} />
-        <color attach="background" args={["#6e6e6e"]} />
         <ScrollControls pages={4} infinite>
           <Rig rotation={[0, 0, 0.15]}>
             <Carousel />
           </Rig>
         </ScrollControls>
+        <Bg />
       </Canvas>
 
       <WheelDrop>
@@ -151,7 +152,10 @@ function Carousel({ radius = 1.4, count = 8 }) {
         Math.cos((i / count) * Math.PI * 2) * radius,
       ]}
       rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
-      onClick={() => navigator(["/demo0", "/demo1"][i % 2])}
+      onClick={(e) => {
+        e.stopPropagation();
+        navigator(["/demo0", "/demo1"][i % 2]);
+      }}
     />
   ));
 }
