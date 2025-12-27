@@ -1,7 +1,7 @@
 import { lazy } from "react";
 
-const Demo3 = lazy(() => import("./demo3"));
+const Demo = lazy(() => import("./demo"));
 
 export default function Index() {
-  return <Demo3 />;
+  return <Demo />;
 }
