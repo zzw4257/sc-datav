@@ -74,7 +74,7 @@ export type SparklesProps = Omit<
 const BeamLight = ({}: SparklesProps) => {
   const ref = useRef<Group>(null!);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     ref.current.children.forEach((beam) => {
       // 向上移动
       beam.position.y += beam.userData.speed * delta;
