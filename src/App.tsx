@@ -5,6 +5,9 @@ import Demo0 from "./pages/Demo0";
 import Demo1 from "./pages/Demo1";
 import Demo2 from "./pages/Demo2";
 import Demo3 from "./pages/Demo3";
+import Dashboard from "./pages/Dashboard";
+import Builder from "./pages/Builder";
+import Viewer from "./pages/Viewer";
 
 const Index = lazy(() => import("./pages/Index/index"));
 
@@ -31,7 +34,11 @@ function App() {
   return (
     <div ref={containerRef} style={{ willChange: "transform, opacity" }}>
       <Routes>
-        <Route path="/" element={<Index />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/sichuan" element={<Index />} />
+        <Route path="/builder" element={<Builder />} />
+        <Route path="/view/:id" element={<Viewer />} />
+        <Route path="/embed/:id" element={<Viewer />} />
         <Route path="/demo0" element={<Demo0 />} />
         <Route path="/demo1" element={<Demo1 />} />
         <Route path="/demo2" element={<Demo2 />} />

@@ -1,83 +1,54 @@
-# 数据可视化大屏
+# DataV React 3D Map Visualization
 
-| [预览地址](https://knight-l.github.io/sc-datav/#/demo0) | [预览地址](https://knight-l.github.io/sc-datav/#/demo1) |
-| ------------------------------------------------------- | ------------------------------------------------------- |
-| ![demo1](./public/demo_0.jpg)                           | ![demo2](./public/demo_1.jpg)                           |
+This project is a modern Web technology-based data visualization large screen application.
 
-| [预览地址](https://knight-l.github.io/sc-datav/#/demo2) | [预览地址](https://knight-l.github.io/sc-datav/#/demo3) |
-| ------------------------------------------------------- | ------------------------------------------------------- |
-| ![demo3](./public/demo_2.jpg)                           | ![demo4](./public/demo_3.jpg)                           |
+**Core Tech Stack:**
+*   React 19 + TypeScript
+*   Vite
+*   Three.js + @react-three/fiber
+*   ECharts
+*   D3-geo
+*   Zustand (State Management)
 
-## 功能特性
+## Features
 
-1. **3D 地图可视化**: 基于 Three.js 的 3D 地图渲染，轮廓飞线动画效果，侧边扫光视觉效果
-2. **省级地图展示**: 四川省地理轮廓精确呈现
-3. **多图表联动**: 柱状图、折线图等多种数据可视化形式
-4. **响应式设计**: 支持多种屏幕尺寸自适应
-5. **实时调试面板**: 使用 Leva 实现参数实时调整
+*   **Sichuan Demo:** An interactive 3D map of Sichuan province with various data visualization demos.
+*   **Map Builder:** A low-code interface to create custom 3D maps by uploading GeoJSON and texture files.
+*   **Dashboard:** A unified entry point to manage and view your maps.
+*   **Embed API:** Easily embed your custom maps into other applications via Iframe.
 
-## 技术栈
+## Getting Started
 
-本项目是一个基于现代 Web 技术的数据可视化大屏应用，主要技术栈包括：
+1.  Install dependencies: `pnpm install`
+2.  Run development server: `pnpm dev`
 
-- **核心框架**: React 19 + TypeScript
-- **构建工具**: Vite (Rolldown 版本)
-- **3D 可视化**: Three.js + @react-three/fiber + @react-three/drei
-- **数据可视化**: ECharts
-- **地理数据处理**: D3-geo
-- **动画库**: GSAP
-- **样式库**: Styled-components
-- **调试工具**: Leva
-- **自适应布局**: autofit.js
+## How to Add a New City (Map Builder)
 
-## 目录结构
+1.  Navigate to the **Dashboard** (the home page).
+2.  Click **"+ Create New Map"**.
+3.  **City Name:** Enter a name for your map.
+4.  **GeoJSON File:** Upload a standard `.json` or `.geojson` file containing the geometry of the region.
+    *   *Note:* Ensure the GeoJSON features have a `name` property if you want stats to be linked automatically.
+5.  **Map Texture:** Upload an image texture for the map surface (e.g., satellite imagery or stylized map).
+6.  **Normal Map Texture:** Upload a normal map image to add depth details to the 3D surface.
+7.  Click **"Create Map"**.
+8.  Your new map will appear on the Dashboard.
 
-```
-src/
-├── assets/             # 静态资源文件
-│   ├── sc.json         # 四川省地理数据
-│   └── sc_outline.json # 四川省轮廓数据
-├── components/         # 通用组件
-│   ├── chart.tsx       # 图表组件
-│   └── seamVirtualScroll.tsx # 虚拟滚动组件
-├── hooks/              # 自定义Hooks
-├── pages/SCDataV/      # 数据大屏页面
-│   ├── index.tsx       # 页面入口
-│   ├── scMap.tsx       # 地图组件
-│   ├── flyLine.tsx     # 飞线动画组件
-│   ├── chart1.tsx      # 图表1
-│   ├── chart2.tsx      # 图表2
-│   ├── chart3.tsx      # 图表3
-│   └── content.tsx     # 内容布局组件
-└── App.tsx             # 应用根组件
-```
+## Embed API
 
-## 开发指南
+You can embed any user-created map into another website using an Iframe.
 
-### 环境要求
+**URL Format:**
+`http://<your-domain>/embed/<map-id>`
 
-- Node.js >= 18
-- PNPM >= 8
-
-### 安装依赖
-
-```bash
-pnpm install
+**Example:**
+```html
+<iframe
+  src="http://localhost:5173/embed/123e4567-e89b-12d3-a456-426614174000"
+  width="100%"
+  height="600px"
+  frameborder="0">
+</iframe>
 ```
 
-### 开发运行
-
-```bash
-# 启动开发服务器
-pnpm dev
-```
-
-### 构建部署
-
-```bash
-# 构建生产版本
-pnpm build
-
-# 预览构建结果
-pnpm preview
-```
+The embed view removes the surrounding UI panels and dashboard navigation, providing a clean 3D visualization canvas.
